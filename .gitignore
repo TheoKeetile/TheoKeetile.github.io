@@ -1,0 +1,14 @@
+# Superseded files left in this folder. They are not referenced by any page,
+# and this keeps them out of the published site. Safe to delete from disk.
+assets/img/roadaid/language.jpg
+assets/docs/hospital-capacity-audit-trail.pdf
+assets/docs/Localisation using a Particle Filter Project Dissertation.pdf
+assets/img/projects/Line Following Buggy team.jpeg
+assets/img/projects/Line following Buggy.jpeg
+
+# OS and editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+~$*

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact - Theo Keetile</title>
+<meta name="description" content="Get in touch with Theo Keetile, mechatronic engineer and data scientist based in Leeds and open to relocating.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">Theo Keetile<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certifications.html">Education</a></li>
+      <li><a href="karate.html">Karate</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h1>Contact</h1>
+      <p>I am looking for graduate roles across engineering and data. Based in Leeds and happy to relocate for the right position.</p>
+    </div>
+
+    <div class="split">
+      <div>
+        <ul class="contact-list">
+          <li>
+            <span class="k">Email</span>
+            <span class="v"><a href="mailto:theo.keetile@outlook.com">theo.keetile@outlook.com</a></span>
+          </li>
+          <li>
+            <span class="k">Phone</span>
+            <span class="v"><a href="tel:+447399319311">07399 319311</a></span>
+          </li>
+          <li>
+            <span class="k">LinkedIn</span>
+            <span class="v"><a href="https://www.linkedin.com/in/theo-keetile-388113287/" rel="noopener">linkedin.com/in/theo-keetile-388113287</a></span>
+          </li>
+          <li>
+            <span class="k">GitHub</span>
+            <span class="v"><a href="https://github.com/TheoKeetile" rel="noopener">github.com/TheoKeetile</a></span>
+          </li>
+          <li>
+            <span class="k">Location</span>
+            <span class="v">Leeds, United Kingdom &middot; open to relocate</span>
+          </li>
+        </ul>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="mailto:theo.keetile@outlook.com">Send an email</a>
+          <a class="btn btn-ghost" href="assets/docs/Theo-Keetile-CV.pdf">Download CV</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="callout">
+          <h3 style="margin-top:0">What I am looking for</h3>
+          <p>Graduate roles in mechatronics, embedded systems, controls and instrumentation, electronics, software, or data science and analysis. The common thread is systems that have to work in the real world and produce evidence that they do.</p>
+          <p>If a role sits somewhere between those categories, that is usually a good sign rather than a problem.</p>
+        </div>
+
+        <div class="callout" style="background:var(--bg-soft);border-color:var(--line)">
+          <h3 style="margin-top:0">Available on request</h3>
+          <p>Official academic transcripts from Leicester, Manchester and Cambridge International, and access to the private repository holding the RoadAid platform source.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>&copy; 2026 Theo Keetile &middot; Leeds, UK</div>
+    <div class="footer-links">
+      <a href="mailto:theo.keetile@outlook.com">theo.keetile@outlook.com</a>
+      <a href="https://github.com/TheoKeetile">GitHub</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.querySelector('.nav-toggle');
+  var list = document.getElementById('nav-links');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function () {
+    var open = list.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+</script>
+</body>
+</html>

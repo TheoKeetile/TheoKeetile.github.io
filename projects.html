@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects - Theo Keetile</title>
+<meta name="description" content="Nine projects by Theo Keetile across embedded systems, robotics, full-stack development, dashboards and statistical modelling, each with the report or dashboard it produced.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html">Theo Keetile<span>.</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">Menu</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html" aria-current="page">Projects</a></li>
+      <li><a href="certifications.html">Education</a></li>
+      <li><a href="karate.html">Karate</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <h1>Projects</h1>
+      <p>Nine projects, grouped by track. Where a project produced a report, dashboard or dissertation, it is attached so you can check the description against what was actually built.</p>
+    </div>
+
+    <!-- ================= ENGINEERING ================= -->
+    <div class="track-eng">
+
+      <div class="track-head">
+        <h2>Engineering</h2>
+        <span>Embedded systems, robotics and full-stack development</span>
+      </div>
+
+      <article class="project" id="roadaid">
+        <p class="project-meta">June - September 2026 &middot; MSc dissertation, group of four &middot; Commissioned by AB Analytics Ltd</p>
+        <h3>RoadAid: Vehicle Recovery and Roadside Assistance Platform</h3>
+        <p class="tools"><strong>Tools:</strong> Flutter, Dart, GetX, Django, Django Channels, Daphne, WebSockets, PostgreSQL, Python, SciPy, Railway</p>
+
+        <div class="shots">
+          <figure><img src="assets/img/roadaid/home.jpg" alt="Client app home screen offering towing or repair, above a list of recent requests" loading="lazy" width="476" height="1030"><figcaption>Home</figcaption></figure>
+          <figure><img src="assets/img/roadaid/request.jpg" alt="Repair request screen with location, optional photo, description and voice note" loading="lazy" width="476" height="1030"><figcaption>Request intake</figcaption></figure>
+          <figure><img src="assets/img/roadaid/triage.jpg" alt="Triage questions covering passengers, children in the vehicle, medical concern and unsafe stopping" loading="lazy" width="476" height="1030"><figcaption>Triage inputs</figcaption></figure>
+          <figure><img src="assets/img/roadaid/estimate.jpg" alt="Cost estimate screen showing a price range in Ethiopian birr" loading="lazy" width="476" height="1030"><figcaption>Fare estimate</figcaption></figure>
+          <figure><img src="assets/img/roadaid/assigned.jpg" alt="Operator assigned screen with operator name, rating and estimated arrival" loading="lazy" width="476" height="1030"><figcaption>Operator assigned</figcaption></figure>
+          <figure><img src="assets/img/roadaid/payment.jpg" alt="Payment screen offering cash, card and mobile money" loading="lazy" width="476" height="1030"><figcaption>Payment</figcaption></figure>
+          <figure><img src="assets/img/roadaid/history.jpg" alt="Job history list showing completed and cancelled jobs with dates, distances and amounts" loading="lazy" width="476" height="1030"><figcaption>Job history</figcaption></figure>
+          <figure><img src="assets/img/roadaid/job-summary.jpg" alt="Job summary showing request details, attachments, times, locations and payment" loading="lazy" width="476" height="1030"><figcaption>Job summary</figcaption></figure>
+          <figure><img src="assets/img/roadaid/earnings.jpg" alt="Operator earnings and fees screen showing jobs completed, total earnings, platform fee and outstanding balance" loading="lazy" width="476" height="1030"><figcaption>Earnings and fees</figcaption></figure>
+          <figure><img src="assets/img/roadaid/settings.jpg" alt="Settings menu with language selection, history, change password and privacy policy" loading="lazy" width="476" height="1030"><figcaption>Settings menu</figcaption></figure>
+        </div>
+
+        <p>Roadside recovery in Addis Ababa is coordinated largely by phone, and the delay between a breakdown and a competent operator arriving carries real risk: the World Health Organization put Ethiopia at an estimated 25.3 road traffic deaths per 100,000 people in 2018. Our brief was to replace that manual coordination with something automated, and to do it under the constraints the city actually imposes, including patchy OpenStreetMap coverage, mobile money rather than cards, and Amharic alongside English.</p>
+
+        <p>The team built on Depannini, an open-source roadside assistance codebase, and added an automated dispatch engine. Single incoming requests are matched by nearest-neighbour search across operators filtered by activity and service type. Requests arriving inside the same batch window are solved together with the Hungarian algorithm over a request-to-operator cost matrix, which produces a globally optimal set of assignments rather than a greedy one. Urgent jobs receive a continuous priority weighting, and the most critical bypass the batch entirely. When an operator declines or an offer times out, the request cascades automatically to the next eligible operator. Batch assignment runs under row-level locking so that two operators cannot be given the same job under load.</p>
+
+        <p>My individually assessed share was the client-facing layer. I built the cancellation policy and its fee model, the fare and earnings screens including the platform commission and settlement view, the job history and job summary screens, bilingual English and Amharic localisation with a currency toggle, and validation for Ethiopian country codes and phone number formats. The platform is deployed on Railway with a managed PostgreSQL database.</p>
+
+        <p>The dissertation is attached in full. It is candid about what was not delivered: demand-aware pricing and two-factor authentication were designed but never implemented, and the concurrency locking cannot be verified against SQLite, so both sit in the future work chapter rather than the results.</p>
+
+        <div class="links">
+          <a class="link-chip" href="assets/docs/roadaid-dissertation.pdf">Full dissertation (PDF)</a>
+          <a class="link-chip ext" href="https://roadside-recovery-production.up.railway.app/" rel="noopener">Live deployment</a>
+        </div>
+        <ul class="tags">
+          <li>Flutter</li><li>Django</li><li>WebSockets</li><li>Hungarian algorithm</li><li>KNN</li><li>PostgreSQL</li><li>localisation</li><li>group project</li>
+        </ul>
+      </article>
+
+      <article class="project" id="buggy">
+        <p class="project-meta">2023/24 &middot; BEng Embedded Systems Project &middot; Team project, mark 79</p>
+        <h3>Autonomous Line-Following Buggy</h3>
+        <p class="tools"><strong>Tools:</strong> C, STM32, Altium Designer</p>
+
+        <div class="gallery" style="grid-template-columns:repeat(2,1fr);margin-bottom:24px">
+          <figure>
+            <img src="assets/img/projects/buggy-vehicle.jpg" alt="The line-following buggy on the competition track, stacked control and driver PCBs visible above the chassis, approaching a laser-cut STOP marker" loading="lazy">
+            <figcaption>The finished buggy on the track, with the control and driver boards stacked above the chassis</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/projects/buggy-team.jpg" alt="The five-person project team standing together, one member holding the completed buggy" loading="lazy">
+            <figcaption>The project team on demonstration day</figcaption>
+          </figure>
+        </div>
+
+        <p>A self-contained autonomous vehicle that detects and follows a track without intervention. I wrote the microcontroller firmware in C for the STM32 platform, covering sensor sampling, the control loop that translates line position into differential motor commands, and the motor driver interface. I also designed the control PCB in Altium, taking it from schematic capture through to layout and manufacture.</p>
+        <p>I led the team through integration and testing, which was where most of the difficulty lay. Individually sound subsystems behaved differently once combined, and tuning the control response so the buggy held the line through tight curves without oscillating took repeated iteration against a physical track rather than in simulation. The project carried double the credit weighting of a standard module, was assessed at 79, and placed in the top 10 of 50 teams.</p>
+        <ul class="tags">
+          <li>C</li><li>STM32</li><li>embedded firmware</li><li>Altium</li><li>PCB design</li><li>control loops</li><li>team leadership</li>
+        </ul>
+      </article>
+
+      <article class="project" id="particle-filter">
+        <p class="project-meta">2024/25 &middot; BEng Individual Project &middot; Mark 65</p>
+        <h3>Robot Localisation Using a Particle Filter</h3>
+        <p class="tools"><strong>Tools:</strong> MATLAB, C++</p>
+
+        <div class="figpair">
+          <figure>
+            <img src="assets/img/projects/pf-environment.jpg" alt="Simulation map showing the robot in blue at the lower left, the target in red at the upper right, two rectangular obstacles, and several hundred green particles scattered across the whole floor plan" loading="lazy">
+            <figcaption>Figure 1 from the dissertation: the simulated environment at initialisation, with particles spread uniformly because the filter has no information yet</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/projects/pf-lidar-beams.jpg" alt="The same simulation map with red lidar beams radiating from the robot in all directions, and the particle cloud now collapsed into a dense cluster around the robot's position" loading="lazy">
+            <figcaption>Figure 7: lidar beams cast in all directions, with the particle cloud now converged on the robot's actual position</figcaption>
+          </figure>
+        </div>
+
+        <p>An implementation of particle filter localisation, the problem of working out where a robot is inside a map it already has, using noisy sensor readings and an imperfect model of its own motion. The filter maintains a population of hypotheses about the robot's pose, propagates them through the motion model, weights each one by how well it explains the latest sensor reading, and resamples so that probability mass concentrates where the evidence points.</p>
+        <p>The two figures above show that process at its start and its end. In the first, the robot has just been switched on and the particles are spread evenly across every part of the floor plan, because at that point any of them could be right. In the second, the lidar has cast its beams, obstacle distances have been compared against the map, and the cloud has collapsed into a tight cluster around the robot's true position. The distance between those two states is the whole of what the filter does.</p>
+
+        <p>The interesting failures are the instructive ones. Too few particles and the filter loses the true pose entirely, while resampling too aggressively collapses the population onto a single wrong hypothesis it can never recover from. The dissertation quantifies both, along with the effect of lidar range, sensor noise and four different resampling strategies. The code is published as a bank of MATLAB examples that illustrate the mechanism step by step rather than as a single black box.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/particle-filter-dissertation.pdf">Full dissertation (PDF)</a>
+          <a class="link-chip code" href="https://github.com/TheoKeetile/Robot-localisation-using-a-particle-filter-" rel="noopener">Source on GitHub</a>
+        </div>
+        <ul class="tags">
+          <li>MATLAB</li><li>C++</li><li>particle filter</li><li>probabilistic robotics</li><li>state estimation</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- ================= DATA SCIENCE ================= -->
+    <div class="track-data">
+
+      <div class="track-head">
+        <h2>Data Science</h2>
+        <span>Visualisation, statistical modelling and applied analysis</span>
+      </div>
+
+      <article class="project" id="energy">
+        <p class="project-meta">2025/26 &middot; MSc Information Visualisation &middot; Individual coursework</p>
+        <h3>The Global Energy Divide</h3>
+        <p class="tools"><strong>Tools:</strong> Tableau, UN Energy Statistics Yearbook</p>
+        <figure class="project-figure">
+          <img src="assets/img/projects/energy-dashboard.jpg" alt="Tableau dashboard titled The Global Energy Divide, with a world choropleth of energy supply per capita, a stacked area chart of continental production, a diverging bar chart of net importers and exporters, a log-log scatter plot and a ranked bar chart of top producers" loading="lazy">
+          <figcaption>The assembled dashboard, covering 1995 to 2022</figcaption>
+        </figure>
+        <p>An interactive dashboard examining the gap between where energy is produced and where it is consumed, built from United Nations energy statistics covering 235 countries between 1995 and 2022. Five coordinated views answer different halves of the question: a choropleth of supply per capita on a log scale, a stacked area chart of production by continent over time, a diverging bar chart separating the ten largest net exporters from the ten largest net importers, a log-log scatter plot of production against per capita supply with total supply encoded as point size, and a ranked bar chart of the largest producers driven by a year selector.</p>
+        <p>Most of the work was in the decisions that are invisible when the dashboard behaves. Raw supply per capita is so skewed that a linear colour scale renders almost every country the same shade, so the scale is logarithmic and clamped, with Greenland excluded as an outlier that would otherwise absorb the entire range. Palettes are colourblind-safe throughout. A single year parameter drives several sheets at once, so the map, the ranking and the scatter always describe the same moment. The accompanying essay sets out the grammar-of-graphics reasoning behind each encoding choice.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/energy-dashboard-report.pdf">Accompanying report (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>Tableau</li><li>choropleth</li><li>log scales</li><li>colourblind-safe palettes</li><li>interaction design</li>
+        </ul>
+      </article>
+
+      <article class="project" id="budget">
+        <p class="project-meta">2025/26 &middot; MSc Excel for Data Science &middot; Individual coursework</p>
+        <h3>Birmingham City Council Budget Distribution Dashboard</h3>
+        <p class="tools"><strong>Tools:</strong> Excel, Power Query, PivotTables, XLOOKUP, exponential smoothing</p>
+        <figure class="project-figure">
+          <img src="assets/img/projects/budget-dashboard.jpg" alt="Excel dashboard for Birmingham City Council showing total expenditure, supplier spend by quarter, a forecast chart, top five directorates, top five beneficiaries and a spending band breakdown" loading="lazy">
+          <figcaption>The navigable dashboard, with slicers for year and quarter</figcaption>
+        </figure>
+        <p>An audit-oriented analysis of every payment Birmingham City Council made to a supplier above &pound;500 between January 2024 and August 2025: roughly 6,000 suppliers and &pound;3,146,333,405.86 of expenditure. The source extract was messy enough that cleaning was the bulk of the work, running to around 88,000 text corrections through Power Query before any analysis was trustworthy.</p>
+        <p>From there the model uses XLOOKUP to assign each payment to a spending band, pivot analysis to surface concentration by directorate and by supplier, and exponential smoothing with a 95% confidence interval to project expenditure to the end of the financial year. The findings point somewhere specific. Spending is heavily concentrated: a single band accounts for &pound;1.45bn of the total, and Equans Regeneration Limited alone received roughly &pound;463m across the two years, ahead of Birmingham Highways, Hays Specialist Recruitment, Willmott Dixon Partnerships and West Mercia Energy. The dashboard closes with audit-priority recommendations drawn from that concentration.</p>
+        <p>The whole workbook is navigable rather than static, with a menu, slicers on year and quarter, and a documented audit trail recording every transformation applied to the raw data.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/budget-dashboard-report.pdf">Report and audit trail (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>Excel</li><li>Power Query</li><li>forecasting</li><li>data cleaning</li><li>public spending</li><li>audit</li>
+        </ul>
+      </article>
+
+      <article class="project" id="automotive-modelling">
+        <p class="project-meta">2025/26 &middot; MSc Modelling Data &middot; Individual coursework, two assessed tasks</p>
+        <h3>Automotive Risk and Repair Cost Modelling</h3>
+        <p class="tools"><strong>Tools:</strong> R, caret, rpart, randomForest, pROC, ggplot2, Quarto</p>
+        <figure class="project-figure">
+          <img src="assets/img/projects/automotive-anomalies.jpg" alt="Stacked bar chart titled Proportion of Anomalies by Fuel Type, showing diesel and petrol claims around twenty per cent anomalous while electric claims are almost entirely flagged" loading="lazy">
+          <figcaption>Anomaly rate by fuel type, the finding that reframed the modelling</figcaption>
+        </figure>
+        <p>A two-part study of 268,255 motor insurance claim records, each carrying vehicle specification, repair cost, labour hours, repair complexity and a flag marking whether the claim was treated as anomalous. The first task was exploratory: assessing data quality, characterising the heavy right skew in repair costs, and profiling where anomalies concentrate. The second built predictive models on top of it.</p>
+        <p>The exploratory work surfaced the signal the modelling then chased. Repair cost relative to a vehicle's market value, rather than repair cost alone, separates plausible claims from implausible ones, since a four thousand pound repair means something very different on a sixty thousand pound car than on a five thousand pound one. Labour rate distributions by manufacturer showed padding signatures, with premium marques carrying rates that inflate faster than parts costs justify. Most striking, and visible above, almost every electric vehicle claim in the dataset was flagged as anomalous, against roughly twenty per cent for petrol and diesel.</p>
+        <p>That last result is the one worth being careful about. Taken at face value it suggests electric vehicles attract fraud. Taken sceptically it suggests the anomaly flag itself was calibrated on combustion vehicles and mislabels an unfamiliar cost profile, which would penalise electric vehicle owners for driving a newer technology. The report argues the second reading and treats the finding as a warning about the label rather than a discovery about drivers.</p>
+        <p>Modelling used logistic regression with down-sampling to handle severe class imbalance, alongside decision trees, random forests and K-means clustering, evaluated by ROC and AUC rather than accuracy, which class imbalance renders meaningless. The assessment also required an equality, diversity and inclusion review of the models, checking whether predictions would unfairly penalise communities already exposed to higher road fatality rates.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/automotive-claims-eda-task1.pdf">Task 1, exploratory analysis (PDF)</a>
+          <a class="link-chip" href="assets/docs/automotive-claims-modelling-task2.pdf">Task 2, modelling report (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>R</li><li>logistic regression</li><li>random forests</li><li>K-means</li><li>ROC and AUC</li><li>class imbalance</li><li>responsible AI</li>
+        </ul>
+      </article>
+
+      <article class="project" id="breckland">
+        <p class="project-meta">2025/26 &middot; MSc Information Visualisation &middot; Individual coursework</p>
+        <h3>Breckland: A Landscape Defined by an Aging Population</h3>
+        <p class="tools"><strong>Tools:</strong> Tableau, 2021 Output Area Classification, UK census data</p>
+        <figure class="project-figure">
+          <img src="assets/img/projects/oac-dashboard.jpg" alt="Tableau dashboard about Breckland showing scatter plots of detached housing against aged and young adult population, a stacked bar of accommodation type by supergroup, economic activity bars and box plots of educational profiles" loading="lazy">
+          <figcaption>Four coordinated views built on the 2021 Output Area Classification</figcaption>
+        </figure>
+        <p>A small-area demographic study of Breckland in Norfolk, built on the 2021 Output Area Classification, which assigns every output area to a supergroup describing the kind of population that lives there. The dashboard argues a single claim across four views: that Breckland's housing, work and education patterns are shaped primarily by age.</p>
+        <p>Paired scatter plots set detached housing share against the 65 to 84 population and then against the 25 to 44 population, and the relationship reverses between them. A stacked bar breaks accommodation type down by supergroup, showing Retired Professionals concentrated in detached housing while the Semi and Unskilled Workforce cluster in terraced and semi-detached stock. Economic activity is split full time against part time by supergroup, and box plots with the underlying points overlaid compare educational profiles. Using distributions rather than means was deliberate: the supergroup averages are close enough that bar charts of the same data would suggest a uniformity the spread does not support.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/oac-visualisation-report.pdf">Accompanying report (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>Tableau</li><li>census data</li><li>geodemographics</li><li>small multiples</li><li>distributions</li>
+        </ul>
+      </article>
+
+      <article class="project" id="fda">
+        <p class="project-meta">2025/26 &middot; MSc Introduction to Functional Data Analysis &middot; Individual mini-project</p>
+        <h3>Functional Data Analysis of Age-Specific Cancer Rate Profiles</h3>
+        <p class="tools"><strong>Tools:</strong> R, Quarto, B-splines, FPCA, permutation testing</p>
+        <p>Functional data analysis treats each observation not as a number but as a curve, which suits incidence rates that vary smoothly across age. Working with the <code>Cancerrate</code> dataset, each calendar year becomes a single curve describing incidence across the age range, and the question becomes whether those curves change systematically over time.</p>
+        <p>The analysis smooths the raw rates with B-spline bases, applies functional principal component analysis to identify the dominant modes of variation between years, and then fits a functional linear regression with calendar year as the predictor, testing the fit with a permutation F-test rather than relying on distributional assumptions that functional data rarely satisfy.</p>
+        <p>The permutation test failed to reject the null hypothesis. On this dataset, calendar year does not predict the age-specific rate profile to any degree the evidence supports. Reporting that plainly, rather than searching for a specification that would produce a significant result, is the honest reading, and the write-up says so.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/functional-data-analysis-mini-project.pdf">Mini-project report (PDF)</a>
+          <a class="link-chip" href="assets/docs/functional-data-analysis-coursework2.pdf">Further coursework (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>R</li><li>Quarto</li><li>B-splines</li><li>FPCA</li><li>functional regression</li><li>permutation tests</li>
+        </ul>
+      </article>
+
+
+      <article class="project" id="ods">
+        <p class="project-meta">2025/26 &middot; MSc Overview of Data Science Practice &middot; Group project</p>
+        <h3>GDP and Life Expectancy: A Reproducible Group Analysis</h3>
+        <p class="tools"><strong>Tools:</strong> R, Quarto, Git, World Bank data</p>
+        <p>A team project examining the relationship between national income and life expectancy, using World Bank indicators. The analysis itself is well-trodden ground, which was rather the point: the module was concerned with how data science is practised rather than which model wins, so the assessment fell on provenance, data quality, reproducibility and collaboration.</p>
+        <p>The work was version controlled in Git and written as a Quarto project that rebuilds end to end from the raw sources, with an explicit assessment of where the indicators come from, how completely they cover the countries and years in question, and which conclusions the gaps will not support. Reflective reports accompanied each stage. It was my strongest module mark of the MSc, at 88.</p>
+        <div class="links">
+          <a class="link-chip" href="assets/docs/gdp-life-expectancy-group-report.pdf">Group report (PDF)</a>
+        </div>
+        <ul class="tags">
+          <li>R</li><li>Quarto</li><li>Git</li><li>reproducibility</li><li>data provenance</li><li>group project</li>
+        </ul>
+      </article>
+
+
+
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>&copy; 2026 Theo Keetile &middot; Leeds, UK</div>
+    <div class="footer-links">
+      <a href="mailto:theo.keetile@outlook.com">theo.keetile@outlook.com</a>
+      <a href="https://github.com/TheoKeetile">GitHub</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.querySelector('.nav-toggle');
+  var list = document.getElementById('nav-links');
+  if (!btn || !list) return;
+  btn.addEventListener('click', function () {
+    var open = list.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+</script>
+</body>
+</html>
