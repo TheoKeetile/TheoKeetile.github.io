@@ -63,6 +63,17 @@
           <figure><img src="assets/img/roadaid/settings.jpg" alt="Settings menu with language selection, history, change password and privacy policy" loading="lazy" width="476" height="1030"><figcaption>Settings menu</figcaption></figure>
         </div>
 
+        <figure class="video-figure">
+          <video controls preload="metadata" playsinline
+                 poster="assets/video/roadaid-demo-poster.jpg"
+                 width="1920" height="1080">
+            <source src="assets/video/roadaid-demo.mp4" type="video/mp4">
+            <p class="video-fallback">Your browser cannot play this video.
+              <a href="assets/video/roadaid-demo.mp4">Download the demonstration (MP4)</a> instead.</p>
+          </video>
+          <figcaption>The platform running end to end: the client app on the left and the operator app on the right, from request through dispatch and live tracking to rating and job summary. Recorded for our final presentation, 1 minute 23 seconds, no sound.</figcaption>
+        </figure>
+
         <p>Roadside recovery in Addis Ababa is coordinated largely by phone, and the delay between a breakdown and a competent operator arriving carries real risk: the World Health Organization put Ethiopia at an estimated 25.3 road traffic deaths per 100,000 people in 2018. Our brief was to replace that manual coordination with something automated, and to do it under the constraints the city actually imposes, including patchy OpenStreetMap coverage, mobile money rather than cards, and Amharic alongside English.</p>
 
         <p>The team built on Depannini, an open-source roadside assistance codebase, and added an automated dispatch engine. Single incoming requests are matched by nearest-neighbour search across operators filtered by activity and service type. Requests arriving inside the same batch window are solved together with the Hungarian algorithm over a request-to-operator cost matrix, which produces a globally optimal set of assignments rather than a greedy one. Urgent jobs receive a continuous priority weighting, and the most critical bypass the batch entirely. When an operator declines or an offer times out, the request cascades automatically to the next eligible operator. Batch assignment runs under row-level locking so that two operators cannot be given the same job under load.</p>
@@ -183,14 +194,24 @@
         <p class="project-meta">2025/26 &middot; MSc Modelling Data &middot; Individual coursework, two assessed tasks</p>
         <h3>Automotive Risk and Repair Cost Modelling</h3>
         <p class="tools"><strong>Tools:</strong> R, caret, rpart, randomForest, pROC, ggplot2, Quarto</p>
-        <figure class="project-figure">
-          <img src="assets/img/projects/automotive-anomalies.jpg" alt="Stacked bar chart titled Proportion of Anomalies by Fuel Type, showing diesel and petrol claims around twenty per cent anomalous while electric claims are almost entirely flagged" loading="lazy">
-          <figcaption>Anomaly rate by fuel type, the finding that reframed the modelling</figcaption>
-        </figure>
+        <div class="figpair">
+          <figure>
+            <img src="assets/img/projects/automotive-anomalies.jpg" alt="Stacked bar chart titled Proportion of Anomalies by Fuel Type, showing diesel and petrol claims around twenty per cent anomalous while electric claims are almost entirely flagged" loading="lazy">
+            <figcaption>Anomaly rate by fuel type, the finding that reframed the modelling</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/projects/automotive-roc.jpg" alt="ROC curve comparison for research question one, showing the random forest curve slightly above the logistic regression curve, both only modestly above the diagonal chance line" loading="lazy">
+            <figcaption>ROC comparison: random forest against logistic regression, both close to the chance diagonal</figcaption>
+          </figure>
+        </div>
         <p>A two-part study of 268,255 motor insurance claim records, each carrying vehicle specification, repair cost, labour hours, repair complexity and a flag marking whether the claim was treated as anomalous. The first task was exploratory: assessing data quality, characterising the heavy right skew in repair costs, and profiling where anomalies concentrate. The second built predictive models on top of it.</p>
         <p>The exploratory work surfaced the signal the modelling then chased. Repair cost relative to a vehicle's market value, rather than repair cost alone, separates plausible claims from implausible ones, since a four thousand pound repair means something very different on a sixty thousand pound car than on a five thousand pound one. Labour rate distributions by manufacturer showed padding signatures, with premium marques carrying rates that inflate faster than parts costs justify. Most striking, and visible above, almost every electric vehicle claim in the dataset was flagged as anomalous, against roughly twenty per cent for petrol and diesel.</p>
         <p>That last result is the one worth being careful about. Taken at face value it suggests electric vehicles attract fraud. Taken sceptically it suggests the anomaly flag itself was calibrated on combustion vehicles and mislabels an unfamiliar cost profile, which would penalise electric vehicle owners for driving a newer technology. The report argues the second reading and treats the finding as a warning about the label rather than a discovery about drivers.</p>
         <p>Modelling used logistic regression with down-sampling to handle severe class imbalance, alongside decision trees, random forests and K-means clustering, evaluated by ROC and AUC rather than accuracy, which class imbalance renders meaningless. The assessment also required an equality, diversity and inclusion review of the models, checking whether predictions would unfairly penalise communities already exposed to higher road fatality rates.</p>
+
+        <p>The second figure is the one that decided how the whole study should be read. Plotting both models on the same ROC axes returned an area under the curve of 0.659 for the random forest and 0.633 for the logistic regression. A perfect classifier scores 1.0 and a coin toss scores 0.5, so both curves sit much closer to chance than to competence. Two things follow. The narrow gap between them says the relationship is not strongly non-linear, since the flexible model barely outperformed the linear one, so no amount of additional model complexity was going to rescue this. And the low absolute figures say the features available simply do not separate anomalous claims from legitimate ones.</p>
+
+        <p>That is the empirical support for the argument made earlier about electric vehicles. If the anomaly flag captured genuine fraud, a random forest given vehicle value, age, repair cost, labour rate and complexity ought to have found considerably more signal than this. A weak curve is consistent with a label that is inconsistently applied rather than a pattern the model failed to see. Reporting that honestly, rather than presenting 0.659 as a working fraud detector, is the conclusion the evidence actually supports.</p>
         <div class="links">
           <a class="link-chip" href="assets/docs/automotive-claims-eda-task1.pdf">Task 1, exploratory analysis (PDF)</a>
           <a class="link-chip" href="assets/docs/automotive-claims-modelling-task2.pdf">Task 2, modelling report (PDF)</a>
@@ -258,7 +279,7 @@
 
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div>&copy; 2026 Theo Keetile &middot; Leeds, UK</div>
+    <div>&copy; 2026 Theo Keetile &middot; United Kingdom</div>
     <div class="footer-links">
       <a href="mailto:theo.keetile@outlook.com">theo.keetile@outlook.com</a>
       <a href="https://github.com/TheoKeetile">GitHub</a>
@@ -267,16 +288,6 @@
   </div>
 </footer>
 
-<script>
-(function () {
-  var btn = document.querySelector('.nav-toggle');
-  var list = document.getElementById('nav-links');
-  if (!btn || !list) return;
-  btn.addEventListener('click', function () {
-    var open = list.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-})();
-</script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

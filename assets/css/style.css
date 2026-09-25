@@ -422,3 +422,187 @@ blockquote.ref cite { display: block; font-style: normal; font-size: .88rem; col
 }
 .figpair figcaption { font-size: .85rem; color: var(--muted); margin-top: 9px; }
 @media (max-width: 700px) { .figpair { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   Interaction layer
+   ============================================================ */
+
+/* stat kicker: names what each headline figure refers to */
+.stat-kicker {
+  display: block; font-size: .74rem; font-weight: 700;
+  letter-spacing: .11em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px;
+}
+
+/* ---------- image hover: lift, zoom, sharpen ---------- */
+
+.shots figure,
+.gallery figure,
+.figpair figure,
+.project-figure { position: relative; }
+
+.shots img,
+.gallery img,
+.figpair img,
+.project-figure img,
+.featured-shot img,
+.portrait-wrap img,
+.karate-hero img {
+  cursor: zoom-in;
+  transition: transform .38s cubic-bezier(.2, .7, .3, 1),
+              box-shadow .38s ease,
+              border-color .38s ease;
+  will-change: transform;
+}
+
+.shots figure:hover img,
+.gallery figure:hover img,
+.figpair figure:hover img,
+.project-figure:hover img,
+.featured-shot:hover img {
+  transform: translateY(-6px) scale(1.035);
+  box-shadow: 0 18px 44px rgba(11, 18, 32, .18);
+  border-color: var(--accent);
+  position: relative;
+  z-index: 2;
+}
+
+.portrait-wrap img:hover,
+.karate-hero img:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 18px 44px rgba(11, 18, 32, .16);
+}
+
+/* caption strengthens with the image */
+.shots figcaption,
+.gallery figcaption,
+.figpair figcaption,
+.project-figure figcaption {
+  transition: color .3s ease;
+}
+.shots figure:hover figcaption,
+.gallery figure:hover figcaption,
+.figpair figure:hover figcaption,
+.project-figure:hover figcaption {
+  color: var(--ink);
+}
+
+/* a quiet hint that an image opens */
+.zoom-hint {
+  position: absolute; top: 10px; right: 10px;
+  width: 30px; height: 30px; border-radius: 8px;
+  background: rgba(11, 18, 32, .62); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .95rem; line-height: 1; opacity: 0;
+  transition: opacity .28s ease; pointer-events: none;
+  backdrop-filter: blur(3px);
+}
+figure:hover > .zoom-hint { opacity: 1; }
+
+/* ---------- lightbox ---------- */
+
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px; padding: 40px 24px;
+  background: rgba(8, 13, 24, .93);
+  opacity: 0; visibility: hidden;
+  transition: opacity .28s ease, visibility .28s ease;
+  cursor: zoom-out;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+
+.lightbox img {
+  max-width: min(1100px, 92vw); max-height: 78vh;
+  width: auto; height: auto;
+  border-radius: 12px; background: #fff;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
+  transform: scale(.96); transition: transform .28s cubic-bezier(.2,.7,.3,1);
+}
+.lightbox.open img { transform: scale(1); }
+
+.lightbox-caption {
+  color: #e8edf5; font-size: .96rem; text-align: center;
+  max-width: 680px; margin: 0; line-height: 1.5;
+}
+
+.lightbox-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(255, 255, 255, .12); color: #fff;
+  border: 1px solid rgba(255, 255, 255, .22);
+  font-size: 1.3rem; line-height: 1; cursor: pointer;
+  transition: background .2s ease;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, .24); }
+
+.lightbox-hint {
+  position: absolute; bottom: 18px; left: 0; right: 0;
+  text-align: center; color: rgba(232, 237, 245, .55); font-size: .8rem;
+}
+
+body.lightbox-open { overflow: hidden; }
+
+/* ---------- scroll reveal ---------- */
+
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.2, .7, .3, 1);
+}
+.reveal.shown { opacity: 1; transform: none; }
+
+/* ---------- small polish ---------- */
+
+.nav-links a { transition: background .2s ease, color .2s ease; }
+
+.link-chip { transition: border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease; }
+.link-chip:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.tags li { transition: transform .2s ease; }
+.tags li:hover { transform: translateY(-2px); }
+
+.rank-row li { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.rank-row li:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+
+.cert-grid a { transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
+.cert-grid a:hover { transform: translateY(-2px); }
+
+.stat { transition: background .3s ease; }
+.stat:hover { background: #fff; }
+
+.btn { transition: background .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+/* ---------- respect reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+  .shots figure:hover img,
+  .gallery figure:hover img,
+  .figpair figure:hover img,
+  .project-figure:hover img,
+  .featured-shot:hover img,
+  .portrait-wrap img:hover,
+  .karate-hero img:hover { transform: none; }
+}
+
+/* the sticky header uses backdrop-filter, which composites above the
+   overlay in some engines; take it out of the way while zoomed */
+body.lightbox-open .site-header { visibility: hidden; }
+
+/* ---------- video ---------- */
+
+.video-figure { margin: 0 0 26px; }
+.video-figure video {
+  display: block; margin: 0 auto;
+  max-width: 100%; max-height: 70vh; width: auto; height: auto;
+  background: #0b1220; border-radius: 12px;
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+}
+.video-figure figcaption {
+  font-size: .85rem; color: var(--muted); margin-top: 11px; text-align: center;
+}
+.video-fallback { font-size: .9rem; color: var(--muted); text-align: center; padding: 14px; }

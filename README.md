@@ -33,7 +33,9 @@ certifications.html     Full academic record and short courses
 karate.html             Karate record, coaching, gallery, certificate and reference
 contact.html            Contact details and CV download
 assets/css/style.css    All styling
+assets/js/site.js       Navigation, image lightbox and scroll reveals
 assets/img/             Portrait, dashboard screenshots, RoadAid app screens, karate photos
+assets/video/           RoadAid demonstration video and its poster frame
 assets/docs/            CV, project reports, certificates and the karate reference
 ```
 
