@@ -606,3 +606,14 @@ body.lightbox-open .site-header { visibility: hidden; }
   font-size: .85rem; color: var(--muted); margin-top: 11px; text-align: center;
 }
 .video-fallback { font-size: .9rem; color: var(--muted); text-align: center; padding: 14px; }
+
+/* ---------- LinkedIn ---------- */
+
+.btn svg, .footer-links svg { flex: none; }
+.btn svg { width: 17px; height: 17px; }
+
+.btn-linkedin { background: #0A66C2; color: #fff; border-color: #0A66C2; }
+.btn-linkedin:hover { background: #084d93; border-color: #084d93; color: #fff; }
+
+.footer-links a { display: inline-flex; align-items: center; gap: 6px; }
+.footer-links svg { width: 15px; height: 15px; }
